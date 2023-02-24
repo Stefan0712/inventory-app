@@ -1,0 +1,20 @@
+<%- layout('../partials/boilerplate') %>
+
+
+
+<div class="card m-5 show-card" style="min-width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%=product.name%></h5>
+      <p class="card-text"><%=product.description%></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Price: <%=product.price%>  </li>
+      <li class="list-group-item">Qty: <%=product.qty%>  </li>
+      <li class="list-group-item">Category: <%=product.category%>  </li>
+    </ul>
+    <div class="card-body">
+        <form action="/products/<%= product._id%>?_method=DELETE" method="POST"><button class="btn btn-danger">Delete</button></form>
+      
+      <a class="btn btn-warning mt-3" href="/products/<%=product._id%>/edit">Edit</a>
+    </div>
+  </div>

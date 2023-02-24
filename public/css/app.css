@@ -1,11 +1,10 @@
 .body-content{
-    background-color: #282A3A;
+    
     width: 100vw;
-    height: 93vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
+}
+.dark-background{
+    background-color: #282A3A;
 }
 .show-card{
     max-width: 500px;

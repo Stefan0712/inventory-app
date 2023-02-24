@@ -1,0 +1,38 @@
+<%- layout('../partials/boilerplate') %>
+
+
+<div class="container mt-5 w-50">
+    <h1 class="card-title text-light"> Add a new product</h1>
+    <form action="/products" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label text-light" for="name">Name</label>
+            <input class="form-control" type="text" name="name" id="name" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-light" for="description">Description</label>
+            <input class="form-control" type="text" name="description" id="description" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-light" for="price">Price</label>
+            <input class="form-control" type="number" name="price" id="price" required min="0">
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-light" for="qty">Qty</label>
+            <input class="form-control" type="number" name="qty" id="qty" required min="0">
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-light" for="category">Category</label>
+            <select class="form-control" name="category" id="category">
+                <% for(cat of categories){ %>
+                <option value="<%=cat.name%>"><%=cat.name%></option>
+                <% } %>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="images">Images</label>
+            <input type="file" name="images" id="images" class="form-control" multiple>
+        </div>
+        <button type="submit" class="btn btn-success">Add product</button>
+        <a href="/" class="btn btn-danger">Go back</a>
+    </form>
+</div>

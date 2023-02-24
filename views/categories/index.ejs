@@ -1,0 +1,14 @@
+<%- layout('../partials/boilerplate') %>
+
+<div class="container mt-5 w-50">
+    <a class="btn btn-success btn-lg mb-3" href="/categories/new">New category</a>
+    <% for(category of categories){ %>
+        <div class="card mb-3">
+            <div class="card-body d-flex align-items-center">
+                <div class="card-title me-3"><%=category.name%></div>
+                <div class="card-subtitle me-auto">Products: <%=category.products.length%></div>
+                <div><a class="btn btn-success " href="/categories/<%=category._id%>">See category</a></div>
+            </div>
+        </div>
+    <% } %>
+</div>
