@@ -8,7 +8,8 @@ const ProductSchema = new Schema({
     description: String,
     category: String,
     price: Number,
-    qty: Number
+    qty: Number,
+    
 })
 
 module.exports = mongoose.model("Product", ProductSchema)

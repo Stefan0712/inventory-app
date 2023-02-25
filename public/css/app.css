@@ -9,3 +9,26 @@
 .show-card{
     max-width: 500px;
 }
+
+.err-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+
+}
+.err-container div{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.login-container{
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
