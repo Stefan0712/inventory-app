@@ -1,0 +1,151 @@
+<%- include('./partials/navbar.ejs') %>
+<script>
+  const toggleLeftMenu = () =>{
+    const leftMenu = document.getElementById('left-menu')
+    leftMenu.classList.toggle('show-side-menu');
+  }
+  const toggleQuickadd = () =>{
+    document.getElementById('quickadd').classList.toggle('show-quickadd')
+  }
+
+  const updateSidePanel = (id) =>{
+    fetch(`/view-item/${id}`)
+    .then((response)=>response.json())
+    .then((data)=>{
+      let product = data.product;
+      document.getElementById('product-name').innerText = product.name;
+      document.getElementById('product-category').innerText = product.category;
+      document.getElementById('product-minStock').innerText = product.minStock;
+      document.getElementById('product-maxStock').innerText = product.maxStock;
+      document.getElementById('product-quantity').innerText = product.quantity;
+      document.getElementById('product-purchasePrice').innerText = product.purchasePrice;
+      document.getElementById('product-price').innerText = product.price;
+      document.getElementById('product-profit').innerText = product.price - product.purchasePrice;
+      document.getElementById('product-expirationDate').innerText = product.expirationDate;
+      document.getElementById('view-item-edit-btn').setAttribute('href',`/edit-item/${product.id}`);
+      document.getElementById('view-item-delete-button').setAttribute('href',`/delete-item/${product.id}`);
+    })
+
+  }
+
+</script>
+
+
+<link rel="stylesheet" href="dashboard.css">
+<div class="dashboard">
+    <div class="dashboard-container">
+        <div class="side-menu" id="left-menu">
+          <div class="side-menu-container">
+
+            <a href="/delete" class="btn btn-danger">Empty Database</a>
+            <a href="/reset-database" class="btn btn-primary">Reset Database</a>
+            <a href="/products" class="btn btn-primary">View Database</a>
+          </div>
+          <div class="side-menu-button-container">
+            <div onClick="toggleLeftMenu()"><p>Show Menu</p></div>
+          </div>
+
+        </div>
+        <div class="dashboard-items-container">
+            <% products.forEach(product => { %>
+        
+
+                <div class="card" style="width: 18rem;">
+                    
+                    <div class="card-body">
+                      <h5 class="card-title"><%= product.name %></h5>
+                      <p class="card-text"><%= product.description %></p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Price: $<%= product.price %></li>
+                      <li class="list-group-item">Min Stock: <%= product.minStock %></li>
+                    </ul>
+                    <div class="card-body">
+                      <a href="/edit-item/<%= product.id %>" class="btn btn-secondary">Edit</a>
+                      <a href="/delete-item/<%= product.id %>" class="btn btn-danger">Delete</a>
+                      <button class="btn btn-primary" onclick="updateSidePanel(<%= product.id %>)">View Item</button>
+                    </div>
+                    <div class="card-body qty-btns">
+                      <form action="/update-quantity/<%= product.id %>" method="POST">
+                        <div class="substract-btn">Qty</div>
+                        <input type="number" name="quantity" value="<%= product.quantity %>">
+                        <button type="submit" class="add-btn">Update</button>
+                      </form>
+                    </div>
+                  </div>
+        
+        
+        
+        
+        
+                <% }) %>
+        </div>
+        <div class="right-side-menu">
+          <div class="product-container container d-flex flex-column ">
+            <div class="product-info m-3">
+              <h2 id="product-name">Product Name</h2>
+              <h5 id="product-category">Product Category</h5>
+            </div>
+            <div class="product-stock-info mb-3 my-5">
+              <div class="stock-info-section">
+                <h5>Min Stock</h5>
+                <p class="form-control" id="product-minStock">10</p>
+              </div>
+              <div class="stock-info-section">
+                <h5>Max Stock</h5>
+                <p class="form-control" id="product-maxStock">50</p>
+              </div>
+              <div class="stock-info-section">
+                <h5>Current Stock</h5>
+                <p class="form-control" id="product-quantity">13</p>
+              </div>
+            </div>
+            <div class="product-price-info mb-3">
+              <div class="price-info-section">
+                <h5>Purchase Price</h5>
+                <p class="form-control" id="product-purchasePrice">$1.00</p>
+              </div>
+              <div class="price-info-section">
+                <h5>Selling Price</h5>
+                <p class="form-control" id="product-price">$1.50</p>
+              </div>
+              <div class="price-info-section">
+                <h5 class="form-label">Profit</h5>
+                <p class="form-control" id="product-profit">$0.50</p>
+              </div>
+            </div>
+            <div class="product-expiration-date mb-3">
+              <label for="expiration-date">Expiration Date</label>
+              <p class="form-control"  id="product-expirationDate">2024-01-01</p>
+            </div>
+            <div class="product-view-buttons d-flex justify-content-around">
+              <a id="view-item-edit-btn" class="btn btn-info" href="/edit-item/id">Edit Item</a>
+              <a id="view-item-delete-btn" class="btn btn-danger" href="/delete-item/id">Delete</a>
+            </div>
+          </div>
+
+          
+        </div>
+    <div class="dashboard-quickadd-container" id="quickadd">
+      <div class="quick-add-btn" onClick="toggleQuickadd()">
+        <i class="bi bi-caret-up"></i>
+        <h4>Quick add an item</h4>
+      </div>
+        
+      <form action="/new" method="POST" class="form-container d-flex">
+              <input class="form-control" type="text" name="name" id="item-name" required placeholder="Name">
+              <select class="form-control" type="text" name="category" id="item-category" required>
+                <option value="Fruit">Fruit</option>
+                <option value="Vegetable">Vegetable</option>
+                <option value="Meat">Meat</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Other">Other</option>
+            </select>
+              <input class="form-control" type="text" name="description" id="item-description" required placeholder="Description">
+              <input class="form-control" type="number" name="price" id="item-price" required placeholder="Price">
+              <input class="form-control" type="number" name="quantity" id="item-quantity" required placeholder="Qty">
+              <button class="btn btn-primary" type="submit">Add</button>
+      </form>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    
+}
+body{
+    overflow: hidden;
+}
+.dashboard{
+    width: 100%;
+    background-color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+.dashboard-container{
+    width: 100%;
+    height: 90%;
+    display: flex;
+    overflow: hidden;
+    
+
+}
+.side-menu{
+    width: 350px;
+    height: 500px;
+    top: calc(50% - 250px);
+    left: -300px;
+    transition: left 0.2s ease-in-out;
+    display: flex;
+    position: absolute;
+    z-index: 100;
+}
+.side-menu-container{
+    width: calc(100% - 50px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    gap: 20px;
+    background-color: white;
+    border: 1px solid lightgray;
+
+
+}
+.side-menu-button-container{
+    height: 100%;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.side-menu-button-container div {
+    width: 50px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    writing-mode: vertical-lr;
+    background-color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid lightgray;
+    border-left: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.side-menu button,
+.side-menu a{
+    width: 75%;
+}
+.show-side-menu{
+    left: 0px;
+    transition: left 0.2s ease-in-out;
+}
+.dashboard-items-container{
+    width: 80%;
+    height: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+.product-stock-info,
+.product-price-info{
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    height: 100px;
+}
+.price-info-section,
+.stock-info-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.price-info-section h5,
+.stock-info-section  h5{
+    margin-bottom: auto;
+}
+.dashboard-quickadd-container{
+    width: 95%;
+    height: 150px;
+    position: absolute;
+    bottom: -75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    border-top-right-radius: 10px;
+    
+
+}
+.right-side-menu{
+    width: 20%;
+}
+.show-quickadd{
+    bottom: 0px;
+    transition: all 0.3s ease-in-out;
+}
+.quick-add-btn{
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.quick-add-btn i{
+    font-size: 2rem;
+   
+}
+
+.dashboard-quickadd-container form select{
+    width: 15%;
+}
+.form-container{
+    border: 1px solid lightgray;
+    background-color: white;
+    height: 100px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+.form-container input{
+    width: 17%;
+}
+.qty-btns{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.substract-btn,
+.qty-btns input,
+.add-btn{
+    height: 100%;
+    border: 1px solid lightgray;
+}
+.substract-btn,
+.add-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.qty-btns input{
+    width: 40%;
+    text-align: center;
+}
+.substract-btn {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 20%;
+}
+.add-btn{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 40%;
+}
+.qty-btns form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}

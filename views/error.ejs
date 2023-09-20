@@ -1,12 +1,17 @@
-<%- layout('../partials/boilerplate') %>
-
-
-<div class="container-fluid d-flex align-items-center err-container">
-    <div class="card">
-        <div class="card-body bg-danger">
-            <p class="text-light fs-3"><%=msg%></p>
-            <a href="/" class="btn btn-success btn-lg mt-3">Go back home</a>
+<%- include('./partials/navbar.ejs') %>
+<link rel="stylesheet" href="errorPage.css">
+<div class="error-container">
+    <div class="error-body">
+        
+        <div class="error-message">
+           <h1><%-  message ? message : 'Oops! Something went wrong. Try again' %> </h1>
+        
+            
         </div>
+        
     </div>
+    <a class="icon-link icon-link-hover" href="/">
+        Go Back Home
+        <svg class="bi" aria-hidden="true"><use xlink:href="#arrow-right"></use></svg>
+      </a>
 </div>
-

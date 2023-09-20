@@ -1,0 +1,19 @@
+*{
+    overflow-x: hidden;
+}
+
+.edit-form-container{
+    height: calc(100vh - 50px);
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    
+}
+form{
+    width: 50%;
+    height: auto;
+    margin-left: 10%;
+}
+form .h2{
+    height: 50px;
+}

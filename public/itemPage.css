@@ -1,0 +1,9 @@
+.status-bar{
+    width: 100%;
+    height: 5px;
+    background-color: lightgray;
+    margin: 0px 15px;
+}
+#stock-status-bar{
+    height: 5px;
+}

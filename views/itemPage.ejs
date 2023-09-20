@@ -1,0 +1,57 @@
+<%- include('./partials/navbar.ejs') %>
+<link rel="stylesheet" href="/itemPage.css">
+<div class="product-container">
+    <div class="product-body">
+        <div class="upper-section">
+
+            <div class="product-info">
+
+                <h2><%= product.name %></h2>
+                <p><%= product.category %></p>
+            </div>
+            <div class="stock-info">
+                    <div class="limit-stock">
+                        <p style="color: <%= minStockColor %>">Min Stock <%= product.minStock %></p>
+                        <p style="color: <%= maxStockColor %>">Max Stock: <%= product.maxStock %></p>
+                    </div>
+                    <div class="status-bar">
+                        <div id="stock-status-bar" style='width: <%= barWidth %>%; background-color: <%= color %>'></div>
+                    </div>
+                    
+                    <div class="current-stock" style="color: <%= currentStockColor %>">
+                        <p>Current Stock</p>
+                        <p><%= product.quantity %></p>
+                        <p><% if (product.quantity <= product.minStock) { %>
+                            Low Stock!
+                        <% } %></p>
+                    </div>
+            </div>
+        </div>
+        <div class="lower-section">
+
+            <div class="quantity-info">
+                <p class="product-qty">Qty: <%= product.quantity %></p>
+                <p class="product-unit">Unit: <%= product.unit %></p>
+            </div>
+    
+            <div class="price-info">
+                <p class="product-price">Selling price: $<%= product.price %></p>
+                <p class="product-purchase-price">Purchase price: $<%= product.purchasePrice %></p>
+                <p class="product-profit">Profit: $ <%- product.price - product.purchasePrice %> per unit</p>
+            </div>
+            <div class="valability-info">
+                <p class="expiration-date">Expiration Date: <%= product.expirationDate %></p>
+                <div class="days-left">Days left: 8 days</div>
+    
+            </div>
+        </div>
+
+
+        
+        <div class="product-btns">
+    
+            <a class="btn btn-info" href="/edit-item/<%= product.id %>">Edit Item</a>
+            <a class="btn btn-danger" href="/delete-item/<%= product.id %>">Delete</a>
+        </div>
+    </div>
+</div>

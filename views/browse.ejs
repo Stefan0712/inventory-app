@@ -1,0 +1,148 @@
+<%- include('./partials/navbar.ejs') %>
+<link rel="stylesheet" type="text/css" href="/browse.css">
+<% let itemsToDisplay = [...products]%>
+<script>
+   
+
+    const applyOrder = (value) =>{
+        const args = value.split('-');
+        console.log(args)
+        fetch(`/filtered-items?order=${args[0]}&column=${args[1]}`)
+        .then((response)=> response.json())
+        .then((data)=>{
+            
+            updateItemList(data);
+        })
+    }
+    const updateCategory = (value)=>{
+        fetch(`/filtered-items?category=${value}`)
+        .then((response)=> response.json())
+        .then((data)=>{
+            updateItemList(data);
+        })
+    }
+    
+    const updateItemList = (data) => {
+  const itemsContainer = document.getElementById('items-container-body');
+  itemsContainer.innerHTML = ''; // Clear the container
+
+  data.products.forEach((product) => {
+    // Create a card element
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.style.width = '18rem';
+
+    // Create card body
+    const cardBody = document.createElement('div');
+    cardBody.classList.add('card-body');
+
+    // Create card title
+    const cardTitle = document.createElement('h5');
+    cardTitle.classList.add('card-title');
+    cardTitle.textContent = product.name;
+
+    // Create card text (description)
+    const cardText = document.createElement('p');
+    cardText.classList.add('card-text');
+    cardText.textContent = product.description;
+
+    // Create a list group for price and quantity
+    const listGroup = document.createElement('ul');
+    listGroup.classList.add('list-group', 'list-group-flush');
+
+    // Create list items for price and quantity
+    const priceItem = document.createElement('li');
+    priceItem.classList.add('list-group-item');
+    priceItem.textContent = `Price: $${product.price}`;
+
+    const quantityItem = document.createElement('li');
+    quantityItem.classList.add('list-group-item');
+    quantityItem.textContent = `Qty: ${product.quantity}`;
+
+    // Create card body for buttons
+    const cardBodyButtons = document.createElement('div');
+    cardBodyButtons.classList.add('card-body');
+
+    // Create view button
+    const viewButton = document.createElement('a');
+    viewButton.href = `/view-item/${product.id}`;
+    viewButton.classList.add('btn', 'btn-primary');
+    viewButton.textContent = 'View Item';
+
+   
+
+    // Append elements to their respective parent elements
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(cardText);
+    card.appendChild(cardBody);
+
+    listGroup.appendChild(priceItem);
+    listGroup.appendChild(quantityItem);
+    card.appendChild(listGroup);
+
+    cardBodyButtons.appendChild(viewButton);
+    card.appendChild(cardBodyButtons);
+
+    // Append the card to the items container
+    itemsContainer.appendChild(card);
+  });
+};
+
+</script>
+
+
+<div class="browse-container">
+
+
+    <div class="filters-container">
+        <h2>Filters</h2>
+        <div class="mb-3 filter-group" >
+            <label class="form-label" for="order">Sort by</label>
+            <select class="form-control" name="order" id="order-dropdrown" onchange="applyOrder(this.value)">
+                <option value="asc-name">Ascending (A-Z)</option>
+                <option value="desc-name">Descending (Z-A)</option>
+                <option value="asc-price">Lower price</option>
+                <option value="desc-price">Higher price</option>
+                <option value="asc-id">First added</option>
+                <option value="desc-id">Last added</option>
+            </select>
+        </div>
+        <div class="mb-3 filter-group">
+            <label class="form-label" for="categorySort">Category</label>
+            <select class="form-control" name="categorySort" id="category-sort" onchange="updateCategory(this.value)">
+                <% categories.map(cat=>{ %>
+                    <option value="<%= cat.category %>"><%= cat.category %></option>
+                <%  }) %>
+            </select>
+        </div>
+       
+    </div>
+    <div class="items-container" id="items-container-body">
+        <% itemsToDisplay.forEach(product => { %>
+        
+
+        <div class="card" style="width: 18rem;">
+            
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text"><%= product.description %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Price: $<%= product.price %></li>
+              <li class="list-group-item">Qty: <%= product.quantity %></li>
+            </ul>
+            <div class="card-body">
+                <a href="/view-item/<%= product.id %>" class="btn btn-primary">View Item</a>
+            </div>
+          </div>
+
+
+
+
+
+        <% }) %>
+    </div>
+
+
+
+</div>

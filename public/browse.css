@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.browse-container{
+    height: calc(100vh - 75px);
+    width: 100%;
+    display: flex;
+}
+.filters-container{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    border-right: 1px solid lightgray;
+}
+.filter-group{
+    width: 75%;
+}
+.filter-group label,
+.filter-group select{
+    width: 100%;
+}
+.items-container{
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.items-container .card{
+    max-height: 30% !important;
+}
